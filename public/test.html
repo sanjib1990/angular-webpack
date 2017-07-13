@@ -1,0 +1,58 @@
+<html>
+
+<head>
+    <title>Angular JS Views</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.min.js"></script>
+</head>
+
+<body>
+<h2>AngularJS Sample Application</h2>
+<div ng-app = "app">
+    <p><a href = "#one">One</a></p>
+    <p><a href = "#two">Two</a></p>
+    <div ng-view></div>
+
+    <script type = "text/ng-template" id = "one.htm">
+        <h2> One </h2>
+        {{message}}
+    </script>
+
+    <script type = "text/ng-template" id = "two.htm">
+        <h2> Two </h2>
+        {{message}}
+    </script>
+</div>
+
+<script>
+    var app = angular.module("app", ['ngRoute']);
+    app.config(['$routeProvider', function($routeProvider) {
+        $routeProvider.
+
+        when('/one', {
+            templateUrl: 'one.htm',
+            controller: 'OneController'
+        }).
+
+        when('/two', {
+            templateUrl: 'two.htm',
+            controller: 'TwoController'
+        }).
+
+        otherwise({
+            redirectTo: '/one'
+        });
+    }]);
+
+    app.controller('OneController', function($scope) {
+        $scope.message = "One Controller";
+    });
+
+    app.controller('TwoController', function($scope) {
+        $scope.message = "Two Controller";
+    });
+
+</script>
+
+</body>
+</html>

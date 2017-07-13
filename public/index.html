@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Sanjib</title>
+    <base href="/">
+</head>
+<body>
+    <div class="container">
+        <div class="row" ng-controller="HelloController">
+            <h1>Angular App</h1>
+            <input type="text" ng-model="helloTo.title" placeholder="NAME"/>
+            <pre>
+                Hello {{helloTo.title}}
+            </pre>
+            <div>
+                message: {{response.message}}<br>
+                status: {{response.status}}<br>
+                data: <br>
+                <ol>
+                    <li ng-repeat="user in response.data" id="{{user.id}}">{{user.name}} :: {{user.address}}</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row" ng-controller="StudentsController">
+            First Name: <input type="text" ng-model="student.firstName"/><br><br>
+            Last Name: <input type="text" ng-model="student.lastName"><br><br>
+            Your Full Name: {{student.fullName()}}
+        </div>
+
+        <div class="row" ng-controller="StudentsController">
+            <table border="1">
+                <tr>
+                    <th>Subject:</th>
+                    <th>Marks</th>
+                </tr>
+                <tr ng-repeat="subject in student.subjects">
+                    <td>{{subject.name}}</td>
+                    <td>{{subject.marks}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="row" ng-controller="HelloController">
+            <form action="#" name="heloform">
+                <label for="fname">F-Name:</label>
+                <input type="text" id="fname" name="fname" ng-model="fname" required>
+                <span style = "color:red" ng-show = "heloform.fname.$dirty && heloform.fname.$invalid">
+                    <span ng-show = "heloform.fname.$error.required">First Name is required.</span>
+                 </span>
+                <br>
+                <label for="lname">L-Name:</label>
+                <input type="text" id="lname" name="lname" ng-model="lname" required>
+                <span style = "color:red" ng-show = "heloform.lname.$dirty && heloform.lname.$invalid">
+                    <span ng-show = "heloform.lname.$error.required">Last Name is required.</span>
+                 </span>
+                <br>
+                <label for="email">E-Mail:</label>
+                <input type="email" name="email" id="email" ng-model="email" required>
+                <span style = "color:red" ng-show = "heloform.email.$dirty && heloform.email.$invalid">
+                    <span ng-show = "heloform.email.$error.required">Last Name is required.</span>
+                    <span ng-show = "heloform.email.$error.email">Email Is invalid</span>
+                 </span>
+                <br>
+                <button type="button" ng-click="resetData()">Reset</button>
+                <button type="button" ng-disabled="heloform.email.$dirty && heloform.email.$invalid
+                || heloform.lname.$dirty && heloform.lname.$invalid
+                || heloform.fname.$dirty && heloform.fname.$invalid">Submit</button>
+            </form>
+        </div>
+
+        <div class="row" ng-controller="OneController">
+            One Controller Message :: {{message}}
+        </div>
+        <div class="row" ng-controller="TwoController">
+            Two Controller Message :: {{message}}
+        </div>
+        <p><a href = "#one">One</a>|<span><a href = "#two">Two</a></span></p>
+        <div ng-view></div>
+
+    </div>
+</body>
+<script type = "text/ng-template" id = "one.htm">
+    <h2> {{message}} </h2>
+</script>
+<script type = "text/ng-template" id = "two.htm">
+    <h2>{{message}}</h2>
+</script>
+<script type="text/javascript" src="/dist/js/bundle.js"></script>
+</html>
